@@ -1,3 +1,4 @@
+package leetcodeBinarySearch;
 import java.util.Arrays;
 
 //Koko loves to eat bananas. There are n piles of bananas, the ith pile has piles[i] bananas. The guards have gone and will come back in h hours.
@@ -10,7 +11,7 @@ import java.util.Arrays;
 
 //Input: piles = [3,6,7,11], h = 8
 //Output: 4
-public class leetcodeBinarySearch {
+public class KokoEatingBananas {
 
 	public int minEatingSpeed(int[] piles, int h) {
 

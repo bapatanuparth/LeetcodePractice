@@ -42,4 +42,36 @@ public class SingleNumberII {
 		}
 		return ones;
 	}
+
+	// method 2, easier approach
+	public int singleNumber2(int[] nums) {
+		// intuition == take some of each bit of each number
+		// as every other number appears 3 times, if sum%3 at each place != 0, it means
+		// that bit sum
+		// included the single element
+		int res = 0;
+		// for each of the 32 bits
+		for (int i = 0; i < 32; i++) {
+			int sum = 0;
+			// traverse over the nums
+			for (int j = 0; j < nums.length; j++) {
+				// always to check if ith bit is set or not, right shift current number by i
+				// then perform & operation with 1
+				// this way we bring that bit to the right most and & with 000001 so we can se
+				// if its set or not
+				if (((nums[j] >> i) & 1) == 1) {
+					sum += 1;
+					sum %= 3; // take %3
+				}
+			}
+			if (sum != 0) {
+				// now in result, we need to set that bit. so we left shift sum by i to reach
+				// the ith bit
+				// then | with the result so that res has that bit set
+				res |= sum << i;
+			}
+		}
+
+		return res;
+	}
 }

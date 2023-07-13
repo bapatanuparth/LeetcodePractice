@@ -1,9 +1,64 @@
 package leetcodeTree;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
+
+class Solution {
+
+//	DFS to build the back edges ( backEdge[child] = parent )
+//	BFS from the target as a center until the distance acheives K.
+
+	Map<TreeNode, TreeNode> backEdge;
+
+	public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
+		backEdge = new HashMap<>();
+		Set<TreeNode> visited = new HashSet<>();
+		List<Integer> res = new ArrayList<>();
+		dfs(root, target);
+
+		Queue<TreeNode> q = new ArrayDeque<>();
+		q.offer(target);
+
+		while (!q.isEmpty() && k >= 0) {
+			int s = q.size();
+			while (s > 0) {
+				TreeNode cur = q.poll();
+				visited.add(cur);
+				if (k == 0)
+					res.add(cur.val);
+				if (backEdge.containsKey(cur) && !visited.contains(backEdge.get(cur)))
+					q.offer(backEdge.get(cur));
+				if (cur.left != null && !visited.contains(cur.left))
+					q.offer(cur.left);
+				if (cur.right != null && !visited.contains(cur.right))
+					q.offer(cur.right);
+				s--;
+			}
+			k--;
+		}
+
+		return res;
+	}
+
+	void dfs(TreeNode root, TreeNode target) {
+		if (root == null || root == target)
+			return;
+		if (root.left != null) {
+			backEdge.put(root.left, root);
+		}
+		if (root.right != null)
+			backEdge.put(root.right, root);
+		dfs(root.left, target);
+		dfs(root.right, target);
+	}
+
+}
 
 public class AllNodesDistanceKInBTress {
 	class TreeNode {

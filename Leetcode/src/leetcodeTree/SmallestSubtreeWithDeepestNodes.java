@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javafx.util.Pair;
-
 //Given the root of a binary tree, the depth of each node is the shortest distance to the root.
 //
 //Return the smallest subtree such that it contains all the deepest nodes in the original tree.
@@ -19,28 +17,28 @@ public class SmallestSubtreeWithDeepestNodes {
 	// we have to find lowest common ancestor of all the leaves
 
 	// efficient single pass solution
-	public TreeNode subtreeWithAllDeepestEff(TreeNode root) {
-
-		return deep(root).getValue();
-	}
-
-	Pair<Integer, TreeNode> deep(TreeNode root) {
-		if (root == null)
-			return new Pair<>(0, null);
-
-		Pair<Integer, TreeNode> l = deep(root.left);
-		Pair<Integer, TreeNode> r = deep(root.right);
-
-		// left and right depth
-		int d1 = l.getKey();
-		int d2 = r.getKey();
-
-		// id d1==d2, then their lca must be root. if d1>d2, it means the left subtree
-		// has more height than right, hence we consider the root returned by left
-		// subtree as lca. otherwise consider root returned by right subtree as the lca
-		// of the maxDepth leaves on the right side.
-		return new Pair<>(Math.max(d1, d2) + 1, d1 == d2 ? root : d1 > d2 ? l.getValue() : r.getValue());
-	}
+//	public TreeNode subtreeWithAllDeepestEff(TreeNode root) {
+//
+//		return deep(root).getValue();
+//	}
+//
+//	Pair<Integer, TreeNode> deep(TreeNode root) {
+//		if (root == null)
+//			return new Pair<>(0, null);
+//
+//		Pair<Integer, TreeNode> l = deep(root.left);
+//		Pair<Integer, TreeNode> r = deep(root.right);
+//
+//		// left and right depth
+//		int d1 = l.getKey();
+//		int d2 = r.getKey();
+//
+//		// id d1==d2, then their lca must be root. if d1>d2, it means the left subtree
+//		// has more height than right, hence we consider the root returned by left
+//		// subtree as lca. otherwise consider root returned by right subtree as the lca
+//		// of the maxDepth leaves on the right side.
+//		return new Pair<>(Math.max(d1, d2) + 1, d1 == d2 ? root : d1 > d2 ? l.getValue() : r.getValue());
+//	}
 
 	// my solution, requires multiple passes
 	// basic strategy --> find out max height

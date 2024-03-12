@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import javafx.util.Pair;
+import leetcodeDynamicProgramming.MaxLengthChain.Pair;
 
 //Given two integer arrays arr1 and arr2, return the minimum number of operations (possibly zero) needed to make arr1 strictly increasing.
 //
